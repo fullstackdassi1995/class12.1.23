@@ -4,47 +4,79 @@ const calc = require('./calculator')
 
 describe('Testing basic functionality of the calculator' ,() => {
 
-    it('adding simple numbers [1 + 1]', () => {
-        // A A A
-        const actual = calc.add(1, 1)
-
-        // actual result ==? expected result
-        const expected = 2
-
+    it('Two arrays whose terms are equal  ([54, nir , 12] ,[54, nir , 12])' , () => {
+        const actual = calc.is_equal([54, 'nir' , 12] ,[54, 'nir' , 12])
+        const expected = true
         assert.strictEqual(expected , actual)
-    }),
-    it('adding zero number to non-zero [1 + 0]', () => {
-        // A A A
-        const actual = calc.add(1, 0)
+    })
 
-        // actual result ==? expected result
-        const expected = 1
-        
-        //assert.strictEqual(expected , actual)
-        expect(expected).to.equal(actual)
+    it('Two arrays whose elements are different ([54, 38 , 54 ] , [Nir , 12 , Nir])' , () => {
+        const actual = calc.is_equal([54, 38 , 54 ] , ['Nir' , 12 , 'Nir'])
+        const expected = false
+        assert.strictEqual(expected , actual)
     })
-    it('multiply simple numbers [3 * 18]' , () => {
-        const actual = calc.mul(3, 18)
-        const expected = 54
-        expect(expected).to.equal(actual)
+
+    it('Two arrays whose terms are equal ([0, 9 , 0 , 83] , [0 , 9 , 0 , 83])' , () => {
+        const actual = calc.is_equal([0, 9 , 0 , 83] , [0 , 9 , 0 , 83])
+        const expected = true
+        assert.strictEqual(expected , actual)
     })
-    it('multiply zero with non-zero [3 * 0]' , () => {
-        const actual = calc.mul(3, 0)
-        const expected = 0
-        expect(expected).to.equal(actual)
-    })
-    it('divide simple numbers [26 / 18]' , () => {
-        const actual = calc.div(26, 18)
-        const expected = 26/18
-        expect(expected).to.equal(actual)
-    })
-    it('divide non-zero with zero[3 / 0]' , () => {
+
+    it('The first parameter is an array and the second is a number ([5658 , 5658] , 5658)' , () => {
         assert.throws(() => {
-            const actual = calc.div(3, 0)
+            const actual = calc.is_equal([5658 , 5658] , 5658)
         }) 
     })
-    // it ('multiply 2 numbers')
-    // it ('multiply zero with non-zero')
-    // it ('div 2 numbers')
-    // it ('div zero with non-zero')
+
+    it('The second parameter is an array and the first is a number (122 , [dan , ron])' , () => {
+        assert.throws(() => {
+            const actual = calc.is_equal(122 , [dan , dan])
+        }) 
+    })
+
+    it('The second parameter is an array and the first is a number (-12.5 , [38 , 23])' , () => {
+        assert.throws(() => {
+            const actual = calc.is_equal(-12.5 , [38 , 23])
+        }) 
+    })
+
+
+
+
+
+    it('The first number is greater than the second (18 , 3 )' , () =>{
+        const actual = calc.is_bigger(18, 3)
+        const expected = true
+        assert.strictEqual(expected , actual)
+    })
+
+    it('The second number is greater  (18 , 33 )' , () =>{
+        const actual = calc.is_bigger(18, 33)
+        const expected = false
+        assert.strictEqual(expected , actual)
+    })
+
+    it('First parameter is not a number  (bill , 33 )' , () =>{
+        assert.throws(() => {
+            const actual = calc.is_bigger(bill , 33 )
+        }) 
+    })
+
+    it('Second parameter is not a number  (-45 , david )' , () =>{
+        assert.throws(() => {
+            const actual = calc.is_bigger(-45 , david )
+        }) 
+    })
+
+    it('The first number is greater than the second (0 , -13 )' , () =>{
+        const actual = calc.is_bigger(0 , -13 )
+        const expected = true
+        assert.strictEqual(expected , actual)
+    })
+
+    it('The second number is greater  (18*2 , 33+15 )' , () =>{
+        const actual = calc.is_bigger(18*2 , 33+15 )
+        const expected = false
+        assert.strictEqual(expected , actual)
+    })
 })
